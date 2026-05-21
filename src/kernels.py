@@ -34,3 +34,8 @@ KERNELS = {
                               [4/256,16/256,24/256,16/256,4/256],
                               [1/256,4/256,6/256,4/256,1/256]]),
 }
+
+def get_kernel(name: str) -> np.ndarray:
+    if name not in KERNELS:
+        raise ValueError(f"Unknown kernel: {name}. Available: {list(KERNELS.keys())}")
+    return KERNELS[name]
