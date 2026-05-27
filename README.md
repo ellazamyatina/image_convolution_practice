@@ -24,6 +24,7 @@ All of them are available both as 3x3 and 5x5 matrix sizes.
 ```bash
 python -m venv venv
 source venv/bin/activate  
+pip install -r requirements.txt 
 pip install -e .
 ```
 
