@@ -1,3 +1,11 @@
+[build-system]
+requires = ["setuptools>=64"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "image_convolution"
+version = "0.1.0"
+
 [tool.ruff.lint]
 extend-select = [
    "F",
