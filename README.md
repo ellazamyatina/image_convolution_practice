@@ -22,10 +22,7 @@ All of them are available both as 3x3 and 5x5 matrix sizes.
 
 ### Setting up environment 
 ```bash
-python -m venv venv
-source venv/bin/activate  
-pip install -r requirements.txt 
-pip install -e .
+uv sync
 ```
 
 ### Process the image with the available kernel
@@ -55,16 +52,16 @@ python -m pytest
 ```
 
 ## Structure of the project:
-src/              
+`src`/              
 ├── convolution.py ← implementation of convolution
 ├── padding.py     ← implementation of padding
 ├── kernels.py     ← kernels
 ├── main.py        ← CLI
 └── benchmark.py   ← benchmark
-tests/      
+`tests`/      
 ├── golden/        ← golden images
 └── test_integration.py
-images/
+`images`/
 ├── input/         ← input images
 └── output/        ← processed images
 
@@ -72,3 +69,7 @@ images/
 ![](images/benchmark.png)
 
 
+### For getting benchmark do: 
+```bash
+python -m src.benchmark
+```
