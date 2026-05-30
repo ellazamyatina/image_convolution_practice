@@ -48,7 +48,7 @@ For this project I use`golden tests`.
 Golden tests run convolution on a real image and compare the result with pre-saved expected images in tests/golden/.
 ### For running tests:
 ```bash
-python -m pytest
+uv run pytest
 ```
 
 ## Structure of the project:

@@ -4,8 +4,8 @@ import numpy as np
 import pytest
 from PIL import Image
 
-from src.convolution import apply_convolution
-from src.kernels import get_kernel
+from convolution import apply_convolution
+from kernels import get_kernel
 
 GOLDEN_DIR = Path(__file__).parent / "golden"
 

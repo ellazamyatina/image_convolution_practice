@@ -1,7 +1,7 @@
 import numpy as np
 from numpy.lib.stride_tricks import sliding_window_view
 
-from src.padding import apply_padding
+from padding import apply_padding
 
 
 def apply_convolution(
