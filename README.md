@@ -63,4 +63,13 @@ uv run pytest
 └── output/        ← processed images
 
 
+## Benchmark comparison
+![](images/benchmark.png)
+
+
+### For getting benchmark do: 
+```bash
+python -m src.benchmark
+```
+
 > The test image `cat.jpg` is from [PublicDomainPictures.net](https://www.publicdomainpictures.net) — Public Domain.

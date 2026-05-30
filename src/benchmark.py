@@ -7,8 +7,8 @@ import matplotlib.pyplot as plt
 import numpy as np
 from PIL import Image, ImageFilter
 
-from src.convolution import apply_convolution
-from src.kernels import get_kernel, KERNELS
+from convolution import apply_convolution
+from kernels import get_kernel, KERNELS
 
 RESULTS_DIR = Path(__file__).resolve().parent.parent / "results"
 
@@ -92,17 +92,18 @@ def plot_results(results):
 
 
 def main():
-    KERNEL_NAMES = list(KERNELS.keys())
-    SIZES = [(256, 256, 3), (256, 256)]
+    kernel_names = list(KERNELS.keys())
+    sizes = [(256, 256, 3), (256, 256)]
 
     results = []
-    for kernel_name in KERNEL_NAMES:
-        for shape in SIZES:
+    for kernel_name in kernel_names:
+        for shape in sizes:
             label, my_ms, sp_ms, cv_ms = run_scenario(kernel_name, shape)
             results.append((label, my_ms, sp_ms, cv_ms))
             mode = "RGB" if len(shape) == 3 else "GRAY"
             print(
-                f"{kernel_name:25s} {mode:5s} | my:{my_ms:8.2f} | pillow:{sp_ms:8.2f} | cv:{cv_ms:8.2f} ms"
+                f"{kernel_name:25s} {mode:5s} | my:{my_ms:8.2f}"
+                f" | pillow:{sp_ms:8.2f} | cv:{cv_ms:8.2f} ms"
             )
 
     data = [
