@@ -17,25 +17,23 @@ version = "0.1.0"
 source = { editable = "." }
 dependencies = [
     { name = "numpy" },
-    { name = "opencv-python" },
-    { name = "pillow" },
 ]
 
 [package.dev-dependencies]
 dev = [
+    { name = "opencv-python" },
+    { name = "pillow" },
     { name = "pytest" },
     { name = "ruff" },
 ]
 
 [package.metadata]
-requires-dist = [
-    { name = "numpy", specifier = ">=2.0" },
-    { name = "opencv-python", specifier = ">=4.9.0.80" },
-    { name = "pillow", specifier = ">=10.3.0" },
-]
+requires-dist = [{ name = "numpy", specifier = ">=2.0" }]
 
 [package.metadata.requires-dev]
 dev = [
+    { name = "opencv-python", specifier = ">=4.9.0.80" },
+    { name = "pillow", specifier = ">=10.3.0" },
     { name = "pytest", specifier = ">=8.2.0" },
     { name = "ruff", specifier = ">=0.3.0" },
 ]

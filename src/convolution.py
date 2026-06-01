@@ -18,12 +18,12 @@ def apply_convolution(
     if is_grayscale:
         image_arr = image_arr[..., None]
 
-    h, w, c = image_arr.shape
-    k_h, k_w = kernel.shape
+    height, width, channels = image_arr.shape
+    kernel_height, kernel_width = kernel.shape
 
     padded = apply_padding(image_arr, kernel.shape, mode=padding_mode)
 
-    windows = sliding_window_view(padded, (k_h, k_w), axis=(0, 1))
+    windows = sliding_window_view(padded, (kernel_height, kernel_width), axis=(0, 1))
     result = np.einsum("hwcxy,xy->hwc", windows, kernel, optimize="greedy")
 
     result = np.clip(result, 0, 255).astype(np.uint8)
