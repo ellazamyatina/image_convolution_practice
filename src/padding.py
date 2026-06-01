@@ -27,13 +27,8 @@ def apply_padding(
     if image.ndim == 3:
         pad_width.append((0, 0))
 
-    kwargs = {}
-    if mode == "zero":
-        kwargs["constant_values"] = 0
-
     return np.pad(
         image,
         pad_width,
         mode=PADDING_MODES[mode],
-        **kwargs,
     )
