@@ -33,7 +33,7 @@ def main():
         print(f"Error: file {args.input} does not exist")
         sys.exit(1)
 
-    img = img.convert("L").convert("RGB") if args.gray else img.convert("RGB")
+    img = img.convert("L") if args.gray else img.convert("RGB")
 
     arr = np.array(img)
     kernel = get_kernel(args.kernel)
