@@ -23,7 +23,14 @@ def apply_convolution(
 
     padded = apply_padding(image_arr, kernel.shape, mode=padding_mode)
 
+    # creates 5D array (height, width, channels, kernel_height, kernel_width)
+    # where windows[h, w, c] is a kernel-sized patch of the padded image
+    # centered at the spatial position (h,w)
     windows = sliding_window_view(padded, (kernel_height, kernel_width), axis=(0, 1))
+
+    # einsum does element-wise patch * kernel and sums over the kernel (x, y):
+    # "hwcxy,xy -> hwc" = for each pixel and channel, multiply and sum.
+    # optimize="greedy" picks the fastest order of operations
     result = np.einsum("hwcxy,xy->hwc", windows, kernel, optimize="greedy")
 
     result = np.clip(result, 0, 255).astype(np.uint8)
