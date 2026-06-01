@@ -8,12 +8,15 @@ version = "0.1.0"
 requires-python = ">=3.11"
 dependencies = [
     "numpy>=2.0",
-    "pillow>=10.3.0",
-    "opencv-python>=4.9.0.80",
 ]
 
 [dependency-groups]
-dev = ["pytest>=8.2.0", "ruff>=0.3.0"]
+dev = [
+    "pytest>=8.2.0", 
+    "ruff>=0.3.0",
+    "pillow>=10.3.0",
+    "opencv-python>=4.9.0.80",
+]
 
 [tool.ruff.format]
 quote-style = "double"
