@@ -7,7 +7,7 @@ from convolution import apply_convolution
 from kernels import get_kernel, KERNELS
 
 KERNEL_NAMES = list(KERNELS.keys())
-SIZES = [(256, 256, 3), (256, 256)]
+SIZES = [(1024, 1024, 3), (1024, 1024), (2048, 2048, 3), (2048, 2048)]
 
 
 def run_pillow(img, kernel):
