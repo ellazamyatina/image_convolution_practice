@@ -46,7 +46,8 @@ def plot_results(data):
             mode = "GRAY" if params.get("gray") else "RGB"
             label = f"{kernel} {mode} ({size}x{size})"
         mean_ms = b["stats"]["mean"] * 1000
-        rows[(label, impl)] = mean_ms
+        std_ms = b["stats"]["stddev"] * 1000
+        rows[(label, impl)] = (mean_ms, std_ms)
 
     kernels_3x3 = ["box blur 3x3", "sharpen 3x3", "gaussian 3x3", "identity 3x3"]
     kernels_5x5 = ["box blur 5x5", "sharpen 5x5", "gaussian 5x5", "identity 5x5"]
@@ -59,21 +60,50 @@ def plot_results(data):
             ax = axes[row][col]
             kernel_name = kernels_3x3[row] if col == 0 else kernels_5x5[row]
 
-            my_vals = []
-            pil_vals = []
-            cv_vals = []
+            my_data = []
+            pil_data = []
+            cv_data = []
             for s, m in size_modes:
                 label = f"{kernel_name} {m} ({s}x{s})"
-                my_vals.append(rows.get((label, "My"), 0))
-                pil_vals.append(rows.get((label, "Pillow"), 0))
-                cv_vals.append(rows.get((label, "OpenCV"), 0))
+                my_data.append(rows.get((label, "My"), (0, 0)))
+                pil_data.append(rows.get((label, "Pillow"), (0, 0)))
+                cv_data.append(rows.get((label, "OpenCV"), (0, 0)))
+            my_vals, my_errs = zip(*my_data)
+            pil_vals, pil_errs = zip(*pil_data)
+            cv_vals, cv_errs = zip(*cv_data)
 
             x = np.arange(len(size_modes))
             width = 0.25
 
-            bars1 = ax.bar(x - width, my_vals, width, label="My", color="#3366cc")
-            bars2 = ax.bar(x, pil_vals, width, label="Pillow", color="#ff9933")
-            bars3 = ax.bar(x + width, cv_vals, width, label="OpenCV", color="#339933")
+            err_kw = {"lw": 1.5, "capsize": 3, "capthick": 1.5}
+
+            ax.bar(
+                x - width,
+                my_vals,
+                width,
+                label="My",
+                color="#3366cc",
+                yerr=my_errs,
+                error_kw=err_kw,
+            )
+            ax.bar(
+                x,
+                pil_vals,
+                width,
+                label="Pillow",
+                color="#ff9933",
+                yerr=pil_errs,
+                error_kw=err_kw,
+            )
+            ax.bar(
+                x + width,
+                cv_vals,
+                width,
+                label="OpenCV",
+                color="#339933",
+                yerr=cv_errs,
+                error_kw=err_kw,
+            )
 
             ax.set_yscale("log")
             ax.set_title(kernel_name)
@@ -85,19 +115,6 @@ def plot_results(data):
                 fontsize=8,
             )
             ax.set_ylabel("Time (ms)")
-
-            for bars in (bars1, bars2, bars3):
-                for bar in bars:
-                    h = bar.get_height()
-                    if h > 0:
-                        ax.text(
-                            bar.get_x() + bar.get_width() / 2,
-                            h,
-                            f"{h:.1f}",
-                            ha="center",
-                            va="bottom",
-                            fontsize=5,
-                        )
 
             if row == 0 and col == 0:
                 ax.legend(fontsize=8)
