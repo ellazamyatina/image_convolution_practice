@@ -63,7 +63,7 @@ uv run pytest
 └── output/        ← processed images
 
 ## Benchmark comparison
-![](images/benchmark.png)
+![](images/benchmark.pdf)
 
 ### For getting benchmark do: 
 ```bash

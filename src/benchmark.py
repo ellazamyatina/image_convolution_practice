@@ -104,7 +104,7 @@ def plot_results(data):
 
     fig.tight_layout()
     RESULTS_DIR.mkdir(parents=True, exist_ok=True)
-    path = RESULTS_DIR / "benchmark.png"
+    path = RESULTS_DIR / "benchmark.pdf"
     fig.savefig(path, dpi=150)
     print(f"Chart saved: {path}")
     plt.close(fig)
