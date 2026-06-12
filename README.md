@@ -49,21 +49,23 @@ uv run pytest
 ```
 
 ## Structure of the project:
-`src`/              
+```
+src/              
 ├── convolution.py ← implementation of convolution
 ├── padding.py     ← implementation of padding
 ├── kernels.py     ← kernels
 ├── main.py        ← CLI
 └── benchmark.py   ← benchmark
-`tests`/      
+tests/      
 ├── golden/        ← golden images
 └── test_integration.py
-`images`/
+images/
 ├── input/         ← input images
 └── output/        ← processed images
+```
 
 ## Benchmark comparison
-![](images/benchmark.pdf)
+![](images/benchmark.png)
 
 ### For getting benchmark do: 
 ```bash
